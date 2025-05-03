@@ -4,6 +4,7 @@ import Dashboard from "../components/Dashboard.vue";
 import Sampah from "../components/Sampah.vue";
 import Nasabah from "../components/Nasabah.vue";
 import JadwalPenimbangan from "../components/JadwalPenimbangan.vue";
+import Penimbangan from "../components/Penimbangan.vue";
 
 const routes = [
     {
@@ -42,6 +43,13 @@ const routes = [
                 component: JadwalPenimbangan,
                 meta: {
                     title: "Jadwal Penimbangan",
+                },
+            },
+            {
+                path: "penimbangan",
+                component: Penimbangan,
+                meta: {
+                    title: "Penimbangan",
                 },
             },
         ],

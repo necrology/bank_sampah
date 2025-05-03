@@ -1,10 +1,13 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SampahController;
 use App\Http\Controllers\NasabahController;
 use App\Http\Controllers\Jadwal_penimbanganController;
-
+use App\Http\Controllers\PenimbanganController;
+use App\Models\Penimbangan;
+use Illuminate\Support\Facades\Session;
 
 //API LOGIN
 Route::post('login', [AuthController::class, 'login']);
@@ -38,10 +41,20 @@ Route::put('/updateDataJadwal/{id}', [Jadwal_penimbanganController::class, 'upda
 
 
 // PENIMBANGAN API
-// Route::get('getPenimbangan', [PenimbanganController::class, 'index']);
+Route::get('getPenimbangan', [PenimbanganController::class, 'index']);
 
-// Route::post('addDataJadwalPenimbangan', [JadwalPenimbanganController::class, 'addDataJadwalPenimbangan']);
+Route::get('fetchJadwal', [PenimbanganController::class, 'fetchJadwal']);
 
-// Route::delete('/deleteDataJadwalPenimbangan/{id}', [JadwalPenimbanganController::class, 'destroy']);
+Route::get('fetchSampah', [PenimbanganController::class, 'fetchSampah']);
 
-// Route::put('/updateDataJadwalPenimbangan/{id}', [JadwalPenimbanganController::class, 'update']);
+Route::post('fetchSampahById', [PenimbanganController::class, 'fetchSampahById']);
+
+Route::post('addDataPenimbangan', [PenimbanganController::class, 'addDataPenimbangan']);
+
+Route::delete('/deleteDataPenimbangan/{id}', [PenimbanganController::class, 'destroy']);
+
+Route::put('/updateDataPenimbangan/{id}', [PenimbanganController::class, 'update']);
+
+
+//Get Session
+Route::get('session', [AuthController::class, 'session']);

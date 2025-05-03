@@ -2,7 +2,10 @@
     <div class="login-form">
         <div class="container">
             <!-- Outer Row -->
-            <div class="row justify-content-center d-flex align-items-center" style="height: 100vh;">
+            <div
+                class="row justify-content-center d-flex align-items-center"
+                style="height: 100vh"
+            >
                 <div class="col-lg-6 col-md-6">
                     <div
                         class="card o-hidden border-0 shadow-lg my-5 col-lg-12"
@@ -10,15 +13,6 @@
                         <div class="card-body p-0">
                             <!-- Nested Row within Card Body -->
                             <div class="row">
-                                <!-- <div class="col-lg-6 d-flex"> -->
-                                <!-- <div class="col-lg-10 mx-auto p-3 m-3"> -->
-                                <!-- <img
-                                            width="100%"
-                                            src="assets/img/login.jpeg"
-                                            alt="Gambar Login"
-                                        /> -->
-                                <!-- </div> -->
-                                <!-- </div> -->
                                 <div class="col-lg-12">
                                     <div class="p-5">
                                         <div class="text-center">
@@ -59,6 +53,15 @@
                                                 Login
                                             </button>
                                         </form>
+                                        <hr />
+                                        <div class="text-center">
+                                            Belum punya akun?
+                                            <a
+                                                class="small"
+                                                href="register.html"
+                                                >Daftar disini!</a
+                                            >
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -88,6 +91,7 @@ export default {
     methods: {
         async login() {
             try {
+                axios.defaults.withCredentials = true;
                 const response = await axios.post(
                     "http://localhost:8000/api/login",
                     {

@@ -73,6 +73,20 @@
             </li>
 
             <!-- Divider -->
+            <hr class="sidebar-divider my-0" />
+
+            <!-- Nav Item - Dashboard -->
+            <li
+                class="nav-item"
+                :class="{ active: isActive('/dashboard/penimbangan') }"
+            >
+                <router-link to="/dashboard/penimbangan" class="nav-link">
+                    <i class="fas fa-fw fa-balance-scale"></i>
+                    <span>Penimbangan</span></router-link
+                >
+            </li>
+
+            <!-- Divider -->
             <hr class="sidebar-divider" />
 
             <!-- Sidebar Toggler (Sidebar) -->
@@ -238,9 +252,23 @@
 
 <script>
 import { useRoute } from "vue-router";
+import axios from "axios";
 
 export default {
+    data() {
+        return {
+            userName: null,
+        };
+    },
     mounted() {
+        axios
+            .get("http://127.0.0.1:8000/api/session", { withCredentials: true })
+            .then((response) => {
+                this.userName = response.data.user_name;
+            })
+            .catch((error) => {
+                console.error("Error fetching session:", error);
+            });
         // Toggle the side navigation
         $("#sidebarToggle, #sidebarToggleTop").on("click", function (e) {
             $("body").toggleClass("sidebar-toggled");

@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AuthController extends Controller
 {
@@ -26,12 +28,17 @@ class AuthController extends Controller
         }
 
         // Mencari user berdasarkan email
-        $user = User::where('email', $request->email)->first();
+        $credentials = $request->only('email', 'password');
 
-        // Cek apakah user ada dan password cocok
-        if ($user && Hash::check($request->password, $user->password)) {
-            // Simpan id user ke session
-            Session::put('user_id', $user->id_user);
+        if (Auth::attempt($credentials)) {
+           
+            Session::put('data',Auth::user());
+            Session::save();
+            Session::regenerate();
+            // $request->session()->regenerate();
+            // $request->session()->put('user', Auth::user());
+            // $request->session()->save();
+
             return response()->json([
                 'message' => 'Login successful'
             ]);
@@ -40,5 +47,10 @@ class AuthController extends Controller
                 'message' => 'Login Failed'
             ]);
         }
+    }
+
+    public function session()
+    {
+        return response()->json(['data' => session()->all()]);
     }
 }

@@ -33,12 +33,15 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    protected $primaryKey = 'id_user';
+    
+    public $timestamps = false;
     /**
      * The attributes that should be cast to native types.
      *
      * @var array<int, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 }
